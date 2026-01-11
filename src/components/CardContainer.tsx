@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Text } from '@toss/tds-mobile';
+import { adaptive } from '@toss/tds-colors';
 import type { Card, ExerciseType } from '../types';
 import { SUIT_SYMBOL, SUIT_COLOR, EXERCISE_IMAGES } from '../constants';
 
@@ -59,7 +60,7 @@ const styles: Record<string, React.CSSProperties> = {
     position: 'relative',
     width: '280px',
     height: '400px',
-    backgroundColor: '#FFFFFF',
+    backgroundColor: adaptive.background,
     borderRadius: '16px',
     boxShadow: '0 4px 20px rgba(0, 0, 0, 0.15)',
     display: 'flex',

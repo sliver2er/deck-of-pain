@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Text, Button } from "@toss/tds-mobile";
+import { adaptive, colors } from "@toss/tds-colors";
 import type { Difficulty } from "../types";
 import { DIFFICULTY_CONFIG } from "../constants";
 
@@ -49,7 +50,7 @@ export function DifficultySelectPage({ onSelect }: DifficultySelectPageProps) {
                 <span style={{ fontWeight: 600 }}>{config.name}</span>
                 <Text
                   typography="t7"
-                  style={{ color: isSelected ? "#ffffff" : "#8B95A1" }}
+                  color={isSelected ? colors.white : adaptive.grey400}
                 >
                   {config.restTime > 0
                     ? `쉬는시간 ${config.restTime}초`
@@ -80,7 +81,7 @@ export function DifficultySelectPage({ onSelect }: DifficultySelectPageProps) {
 const styles: Record<string, React.CSSProperties> = {
   container: {
     minHeight: "100vh",
-    backgroundColor: "#ffffff",
+    backgroundColor: adaptive.background,
     display: "flex",
     flexDirection: "column",
   },
@@ -90,7 +91,7 @@ const styles: Record<string, React.CSSProperties> = {
     alignItems: "center",
     justifyContent: "center",
     padding: "16px 20px",
-    borderBottom: "1px solid #F2F4F6",
+    borderBottom: `1px solid ${adaptive.grey100}`,
   },
   content: {
     flex: 1,
@@ -105,7 +106,7 @@ const styles: Record<string, React.CSSProperties> = {
   hint: {
     marginTop: "24px",
     padding: "16px",
-    backgroundColor: "#F9FAFB",
+    backgroundColor: adaptive.grey50,
     borderRadius: "12px",
     textAlign: "center",
   },
@@ -115,6 +116,6 @@ const styles: Record<string, React.CSSProperties> = {
     left: 0,
     right: 0,
     padding: "12px 20px 34px",
-    backgroundColor: "#ffffff",
+    backgroundColor: adaptive.background,
   },
 };

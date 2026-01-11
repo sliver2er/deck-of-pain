@@ -1,4 +1,5 @@
 import { Text, Button } from "@toss/tds-mobile";
+import { adaptive } from "@toss/tds-colors";
 import logo from "../assets/logo/logo.png";
 
 interface LandingPageProps {
@@ -14,7 +15,7 @@ export function LandingPage({ onNext }: LandingPageProps) {
             고통의 카드팩
           </Text>
           <br />
-          <Text typography="t6" style={{ marginTop: 8, color: "#6B7684" }}>
+          <Text typography="t6" style={{ marginTop: 8 }} color={adaptive.grey500}>
             트럼프 카드로 홈트하기
           </Text>
         </div>
@@ -24,7 +25,7 @@ export function LandingPage({ onNext }: LandingPageProps) {
         </div>
 
         <div style={styles.description}>
-          <Text typography="t6" style={{ color: "#4E5968", lineHeight: 1.6 }}>
+          <Text typography="t6" color={adaptive.grey600} style={{ lineHeight: 1.6 }}>
             트럼프 카드를 이용한 재미있는 맨몸운동이에요.
             <br />
             <br />
@@ -59,7 +60,7 @@ export function LandingPage({ onNext }: LandingPageProps) {
 const styles: Record<string, React.CSSProperties> = {
   container: {
     minHeight: "100vh",
-    backgroundColor: "#ffffff",
+    backgroundColor: adaptive.background,
     display: "flex",
     flexDirection: "column",
   },
@@ -92,6 +93,6 @@ const styles: Record<string, React.CSSProperties> = {
     left: 0,
     right: 0,
     padding: "12px 20px 34px",
-    backgroundColor: "#ffffff",
+    backgroundColor: adaptive.background,
   },
 };
