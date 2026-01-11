@@ -5,6 +5,7 @@
 트럼프 카드 52장을 이용한 맨몸운동 앱. 토스 앱인토스 플랫폼에서 동작.
 
 **핵심 컨셉:**
+
 - 카드 문양별로 다른 운동 수행 (스페이드=스쿼트, 클로버=싯업, 하트=버피, 다이아=푸쉬업)
 - 카드 숫자만큼 운동 반복
 - 난이도별 쉬는 시간 차등
@@ -13,14 +14,14 @@
 
 ## 기술 스택
 
-| 기술 | 버전/설명 |
-|------|----------|
-| React | 19 |
-| TypeScript | 5.9 |
-| Vite | 7.2 |
+| 기술                        | 버전/설명             |
+| --------------------------- | --------------------- |
+| React                       | 19                    |
+| TypeScript                  | 5.9                   |
+| Vite                        | 7.2                   |
 | @apps-in-toss/web-framework | 1.7.1 (토스 앱인토스) |
-| @toss/tds-mobile | Toss Design System |
-| @toss/tds-colors | adaptive 색상 |
+| @toss/tds-mobile            | Toss Design System    |
+| @toss/tds-colors            | adaptive 색상         |
 
 **중요:** TDS 컴포넌트를 최대한 사용할 것 (`Text`, `Button`, `Modal`, `FixedBottomCTA` 등)
 
@@ -30,13 +31,13 @@
 
 ### 완료된 Phase
 
-| Phase | 내용 | 상태 |
-|-------|------|------|
-| 1 | 기본 구조 세팅 | ✅ 완료 |
-| 2 | 핵심 로직 구현 | ✅ 완료 |
-| 3 | 컴포넌트 구현 | ✅ 완료 |
-| 4 | 페이지 구현 | ✅ 완료 |
-| 5 | 테스트 및 마무리 | 🔄 진행 중 |
+| Phase | 내용             | 상태       |
+| ----- | ---------------- | ---------- |
+| 1     | 기본 구조 세팅   | ✅ 완료    |
+| 2     | 핵심 로직 구현   | ✅ 완료    |
+| 3     | 컴포넌트 구현    | ✅ 완료    |
+| 4     | 페이지 구현      | ✅ 완료    |
+| 5     | 테스트 및 마무리 | 🔄 진행 중 |
 
 ### 생성된 파일 목록
 
@@ -117,12 +118,22 @@ ResultPage → 상세 통계 표시
 
 ```typescript
 DIFFICULTY_CONFIG = {
-  beginner: { name: '입문', restTime: 20, faceCardValue: 10, isHardcore: false },
-  easy:     { name: '초급', restTime: 15, faceCardValue: 10, isHardcore: false },
-  medium:   { name: '중급', restTime: 8,  faceCardValue: 10, isHardcore: false },
-  hard:     { name: '고급', restTime: 3,  faceCardValue: 10, isHardcore: false },
-  hardcore: { name: '하드코어', restTime: 0, faceCardValue: 0, isHardcore: true },
-}
+  beginner: {
+    name: "입문",
+    restTime: 20,
+    faceCardValue: 10,
+    isHardcore: false,
+  },
+  easy: { name: "초급", restTime: 15, faceCardValue: 10, isHardcore: false },
+  medium: { name: "중급", restTime: 8, faceCardValue: 10, isHardcore: false },
+  hard: { name: "고급", restTime: 3, faceCardValue: 10, isHardcore: false },
+  hardcore: {
+    name: "하드코어",
+    restTime: 0,
+    faceCardValue: 0,
+    isHardcore: true,
+  },
+};
 ```
 
 - 입문~고급: J,Q,K,A = 10회

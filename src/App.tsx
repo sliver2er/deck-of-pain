@@ -28,6 +28,8 @@ function App() {
     setShowResult(false);
   };
 
+  console.log("App render, phase:", session.phase);
+
   if (session.phase === "ready") {
     return <LandingPage onStart={handleStart} />;
   }
@@ -46,7 +48,7 @@ function App() {
     return <CompletePage onViewStats={handleViewStats} onGoHome={handleGoHome} />;
   }
 
-  if (!session.currentCard) return null;
+  if (!session.currentCard || !session.currentExercise) return null;
 
   return (
     <WorkoutPage

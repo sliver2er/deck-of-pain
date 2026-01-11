@@ -112,7 +112,7 @@ export function LandingPage({ onStart }: LandingPageProps) {
 const styles: Record<string, React.CSSProperties> = {
   container: {
     minHeight: "100vh",
-    backgroundColor: adaptive.background,
+    backgroundColor: "#ffffff",
   },
   content: {
     padding: "24px 20px",
@@ -139,6 +139,6 @@ const styles: Record<string, React.CSSProperties> = {
     left: 0,
     right: 0,
     padding: "12px 20px 34px",
-    backgroundColor: adaptive.background,
+    backgroundColor: "#ffffff",
   },
 };
