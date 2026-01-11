@@ -1,13 +1,13 @@
-import { Text, Button, Modal } from '@toss/tds-mobile';
-import { adaptive } from '@toss/tds-colors';
-import type { Card, ExerciseType, Difficulty } from '../types';
-import { CardContainer } from '../components/CardContainer';
-import { RestTimer } from '../components/RestTimer';
-import { ProgressIndicator } from '../components/ProgressIndicator';
-import { EXERCISE_NAME, DIFFICULTY_CONFIG } from '../constants';
+import { Text, Button, Modal } from "@toss/tds-mobile";
+import { adaptive } from "@toss/tds-colors";
+import type { Card, ExerciseType, Difficulty } from "../types";
+import { CardContainer } from "../components/CardContainer";
+import { RestTimer } from "../components/RestTimer";
+import { ProgressIndicator } from "../components/ProgressIndicator";
+import { EXERCISE_NAME, DIFFICULTY_CONFIG } from "../constants";
 
 interface WorkoutPageProps {
-  phase: 'exercise' | 'rest';
+  phase: "exercise" | "rest";
   currentCard: Card;
   currentExercise: ExerciseType;
   exerciseCount: number;
@@ -35,7 +35,6 @@ export function WorkoutPage({
   difficulty,
   onComplete,
   onSkipRest,
-  onPause,
   onResume,
   onQuit,
 }: WorkoutPageProps) {
@@ -48,7 +47,7 @@ export function WorkoutPage({
       </div>
 
       <div style={styles.main}>
-        {phase === 'exercise' ? (
+        {phase === "exercise" ? (
           <>
             <CardContainer card={currentCard} exerciseType={currentExercise} />
             <div style={styles.exerciseInfo}>
@@ -70,7 +69,7 @@ export function WorkoutPage({
       </div>
 
       <div style={styles.footer}>
-        {phase === 'exercise' && (
+        {phase === "exercise" && (
           <Button
             size="xlarge"
             variant="fill"
@@ -83,15 +82,6 @@ export function WorkoutPage({
         )}
 
         <div style={styles.controlButtons}>
-          <Button
-            size="large"
-            variant="weak"
-            color="light"
-            display="block"
-            onClick={isPaused ? onResume : onPause}
-          >
-            {isPaused ? '재개' : '일시정지'}
-          </Button>
           <Button
             size="large"
             variant="weak"
@@ -108,7 +98,9 @@ export function WorkoutPage({
         <Modal.Overlay onClick={onResume} />
         <Modal.Content>
           <div style={styles.pauseModal}>
-            <Text typography="t1" style={{ marginBottom: 8 }}>⏸️</Text>
+            <Text typography="t1" style={{ marginBottom: 8 }}>
+              ⏸️
+            </Text>
             <Text typography="t3" fontWeight="bold" color={adaptive.grey900}>
               일시정지
             </Text>
@@ -141,50 +133,50 @@ export function WorkoutPage({
 
 const styles: Record<string, React.CSSProperties> = {
   container: {
-    minHeight: '100vh',
-    display: 'flex',
-    flexDirection: 'column',
+    minHeight: "100vh",
+    display: "flex",
+    flexDirection: "column",
     backgroundColor: adaptive.grey50,
   },
   header: {
-    padding: '20px',
+    padding: "20px",
     backgroundColor: adaptive.background,
   },
   main: {
     flex: 1,
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: '24px',
-    gap: '24px',
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    padding: "24px",
+    gap: "24px",
   },
   exerciseInfo: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    gap: '8px',
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    gap: "8px",
   },
   footer: {
-    padding: '20px',
-    paddingBottom: '34px',
+    padding: "20px",
+    paddingBottom: "34px",
     backgroundColor: adaptive.background,
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '12px',
+    display: "flex",
+    flexDirection: "column",
+    gap: "12px",
   },
   controlButtons: {
-    display: 'flex',
-    gap: '12px',
+    display: "flex",
+    gap: "12px",
   },
   pauseModal: {
-    padding: '32px 24px',
-    textAlign: 'center',
+    padding: "32px 24px",
+    textAlign: "center",
   },
   pauseButtons: {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '12px',
-    marginTop: '24px',
+    display: "flex",
+    flexDirection: "column",
+    gap: "12px",
+    marginTop: "24px",
   },
 };

@@ -6,7 +6,7 @@ interface CompletePageProps {
   onGoHome: () => void;
 }
 
-export function CompletePage({ onViewStats, onGoHome }: CompletePageProps) {
+export function CompletePage({ onViewStats }: CompletePageProps) {
   return (
     <div style={styles.container}>
       <div style={styles.content}>
@@ -32,15 +32,6 @@ export function CompletePage({ onViewStats, onGoHome }: CompletePageProps) {
           onClick={onViewStats}
         >
           통계 보기
-        </Button>
-        <Button
-          size="xlarge"
-          variant="weak"
-          color="light"
-          display="block"
-          onClick={onGoHome}
-        >
-          홈으로
         </Button>
       </div>
     </div>

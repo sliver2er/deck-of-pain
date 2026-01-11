@@ -265,11 +265,19 @@ src/
 **생성된 파일:**
 | 파일 | 설명 | TDS 컴포넌트 |
 |------|------|-------------|
-| `src/pages/LandingPage.tsx` | 난이도 선택 + 시작 | `Text`, `Button`, `Post.Paragraph` |
+| `src/pages/LandingPage.tsx` | 앱 소개 + 시작하기 | `Text`, `Button` |
+| `src/pages/DifficultySelectPage.tsx` | 난이도 선택 (NEW) | `Text`, `Button` |
 | `src/pages/WorkoutPage.tsx` | 운동 진행 화면 | `Text`, `Button`, `Modal` |
 | `src/pages/CompletePage.tsx` | 축하 화면 | `Text`, `Button` |
 | `src/pages/ResultPage.tsx` | 상세 통계 화면 | `Text`, `Button` |
 | `src/App.tsx` | 페이지 라우팅 | - |
+
+**주요 변경 사항 (2025-01-12):**
+- 페이지 구조 변경: LandingPage(소개) → DifficultySelectPage(난이도) → WorkoutPage
+- assets 폴더 이동: `assets/` → `src/assets/`
+- 이미지 import 방식 변경: 문자열 경로 → ES module import
+- main.tsx에 ThemeProvider 추가 필수
+- @emotion/react 패키지 추가됨
 
 ---
 

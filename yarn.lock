@@ -3245,6 +3245,13 @@
   resolved "https://registry.yarnpkg.com/@toss/tds-colors/-/tds-colors-0.1.0.tgz#62afe0fe441810227a6b3b3a1d04a33b0f15967b"
   integrity sha512-NVV6vpcqobw8NBD7EKFS+muvmiyDsUItzzko9ib2RufU2DywlSb4A/4EyBO9EFV/Ff28ODrWySIuS6MjzDpiPw==
 
+"@toss/tds-mobile-ait@^2.2.0":
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/@toss/tds-mobile-ait/-/tds-mobile-ait-2.2.0.tgz#d2a137a69d779e66da3df7158072bfd7cc8a7256"
+  integrity sha512-fLBNigOwT18jMBA/mX2m4qFZNZSEcBbuQDZ6ETIgiPSmhe7ReU102ZBlkLhGSfS7WY8ATae8ri+o5c9TjpvWpw==
+  dependencies:
+    "@toss/tds-colors" "^0.1.0"
+
 "@toss/tds-mobile@^2.2.0":
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/@toss/tds-mobile/-/tds-mobile-2.2.0.tgz#2ee8e0f9ae9c67461f17bce5dd063e987fc3b428"

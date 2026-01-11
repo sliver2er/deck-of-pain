@@ -1,40 +1,59 @@
 import { useState } from "react";
 import { useWorkoutSession } from "./hooks/useWorkoutSession";
 import { LandingPage } from "./pages/LandingPage";
+import { DifficultySelectPage } from "./pages/DifficultySelectPage";
 import { WorkoutPage } from "./pages/WorkoutPage";
 import { CompletePage } from "./pages/CompletePage";
 import { ResultPage } from "./pages/ResultPage";
+import type { Difficulty } from "./types";
+
+type Page = "landing" | "difficulty" | "workout" | "complete" | "result";
 
 function App() {
   const session = useWorkoutSession();
-  const [showResult, setShowResult] = useState(false);
+  const [page, setPage] = useState<Page>("landing");
 
-  const handleStart = (difficulty: Parameters<typeof session.startSession>[0]) => {
+  const handleNext = () => {
+    setPage("difficulty");
+  };
+
+  const handleBack = () => {
+    setPage("landing");
+  };
+
+  const handleSelectDifficulty = (difficulty: Difficulty) => {
     session.startSession(difficulty);
-    setShowResult(false);
+    setPage("workout");
   };
 
   const handleQuit = () => {
     session.quit();
-    setShowResult(true);
+    setPage("result");
   };
 
   const handleViewStats = () => {
-    setShowResult(true);
+    setPage("result");
   };
 
   const handleGoHome = () => {
     session.reset();
-    setShowResult(false);
+    setPage("landing");
   };
 
-  console.log("App render, phase:", session.phase);
-
-  if (session.phase === "ready") {
-    return <LandingPage onStart={handleStart} />;
+  if (page === "landing") {
+    return <LandingPage onNext={handleNext} />;
   }
 
-  if (showResult) {
+  if (page === "difficulty") {
+    return (
+      <DifficultySelectPage
+        onSelect={handleSelectDifficulty}
+        onBack={handleBack}
+      />
+    );
+  }
+
+  if (page === "result") {
     return (
       <ResultPage
         stats={session.stats}
@@ -44,11 +63,15 @@ function App() {
     );
   }
 
-  if (session.phase === "complete") {
-    return <CompletePage onViewStats={handleViewStats} onGoHome={handleGoHome} />;
+  if (session.phase === "complete" || page === "complete") {
+    return (
+      <CompletePage onViewStats={handleViewStats} onGoHome={handleGoHome} />
+    );
   }
 
-  if (!session.currentCard || !session.currentExercise) return null;
+  if (!session.currentCard || !session.currentExercise) {
+    return null;
+  }
 
   return (
     <WorkoutPage

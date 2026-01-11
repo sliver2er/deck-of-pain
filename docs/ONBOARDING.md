@@ -22,14 +22,13 @@
 | @apps-in-toss/web-framework | 1.7.1 (토스 앱인토스) |
 | @toss/tds-mobile            | Toss Design System    |
 | @toss/tds-colors            | adaptive 색상         |
-
-**중요:** TDS 컴포넌트를 최대한 사용할 것 (`Text`, `Button`, `Modal`, `FixedBottomCTA` 등)
+| @emotion/react              | 11 (TDS 의존성)       |
 
 ---
 
 ## 현재 진행 상황
 
-### 완료된 Phase
+### Phase 현황
 
 | Phase | 내용             | 상태       |
 | ----- | ---------------- | ---------- |
@@ -43,12 +42,13 @@
 
 ```
 src/
+├── assets/                   ✅ 이미지 에셋 (icons/, logo/)
 ├── types/
-│   └── index.ts              ✅ 타입 정의 (Suit, Card, Difficulty, WorkoutStats 등)
+│   └── index.ts              ✅ 타입 정의
 ├── constants/
-│   └── index.ts              ✅ 상수 (난이도 설정, 운동 매핑, 이미지 경로 등)
+│   └── index.ts              ✅ 상수 (이미지 import 방식)
 ├── utils/
-│   └── deck.ts               ✅ 카드 덱 유틸 (createDeck, shuffleDeck, getExerciseCount)
+│   └── deck.ts               ✅ 카드 덱 유틸
 ├── hooks/
 │   ├── useDeck.ts            ✅ 덱 상태 관리
 │   ├── useTimer.ts           ✅ 스톱워치 + 카운트다운
@@ -58,177 +58,168 @@ src/
 │   ├── RestTimer.tsx         ✅ 쉬는 시간 카운트다운
 │   └── ProgressIndicator.tsx ✅ 진행률 표시 (n/52)
 ├── pages/
-│   ├── LandingPage.tsx       ✅ 난이도 선택 + 시작
+│   ├── LandingPage.tsx       ✅ 앱 소개 + 시작하기
+│   ├── DifficultySelectPage.tsx ✅ 난이도 선택 (NEW)
 │   ├── WorkoutPage.tsx       ✅ 운동 진행 화면
 │   ├── CompletePage.tsx      ✅ 축하 화면
 │   └── ResultPage.tsx        ✅ 상세 통계 화면
 ├── App.tsx                   ✅ 페이지 라우팅
-└── main.tsx                  ✅ 진입점
+├── main.tsx                  ✅ 진입점 (ThemeProvider)
+└── index.css                 ✅ 기본 스타일
 ```
 
 ---
 
-## 핵심 로직 이해
-
-### useWorkoutSession 훅 (src/hooks/useWorkoutSession.ts)
-
-전체 운동 세션을 관리하는 핵심 훅. 다음 값들을 반환:
-
-```typescript
-{
-  phase: 'ready' | 'exercise' | 'rest' | 'complete',  // 현재 상태
-  currentCard: Card | null,      // 현재 뽑은 카드
-  currentExercise: ExerciseType, // 현재 운동 종류
-  exerciseCount: number,         // 수행할 운동 횟수
-  completedCards: number,        // 완료한 카드 수
-  totalCards: 52,
-  restTime: number,              // 남은 쉬는 시간
-  stats: WorkoutStats,           // 운동 통계
-  isPaused: boolean,             // 일시정지 상태
-  difficulty: Difficulty,        // 선택된 난이도
-
-  // 액션 함수들
-  startSession: (difficulty) => void,  // 세션 시작
-  completeExercise: () => void,        // 운동 완료
-  skipRest: () => void,                // 쉬는 시간 건너뛰기
-  pause: () => void,                   // 일시정지
-  resume: () => void,                  // 재개
-  quit: () => void,                    // 포기 (결과 화면으로)
-  reset: () => void,                   // 초기화
-}
-```
-
-### 운동 플로우
+## 페이지 플로우 (업데이트됨)
 
 ```
-LandingPage → 난이도 선택 → startSession(difficulty)
-    ↓
+LandingPage (앱 소개)
+    ↓ 시작하기 버튼
+DifficultySelectPage (난이도 선택)
+    ↓ 난이도 선택 후 운동 시작
 WorkoutPage (phase: 'exercise')
     ↓ completeExercise()
-WorkoutPage (phase: 'rest') → 카운트다운 또는 skipRest()
-    ↓ 자동 또는 수동
+WorkoutPage (phase: 'rest') → 카운트다운
+    ↓ 자동 또는 skipRest()
 WorkoutPage (phase: 'exercise') → 반복...
     ↓ 52장 완료 시 (phase: 'complete')
-CompletePage → "축하해요!" + "통계 보기" 버튼
-    ↓
+CompletePage → "고생 많았어요!" + 버튼들
+    ↓ 통계 보기
 ResultPage → 상세 통계 표시
 ```
 
-### 난이도 설정 (src/constants/index.ts)
+---
 
-```typescript
-DIFFICULTY_CONFIG = {
-  beginner: {
-    name: "입문",
-    restTime: 20,
-    faceCardValue: 10,
-    isHardcore: false,
-  },
-  easy: { name: "초급", restTime: 15, faceCardValue: 10, isHardcore: false },
-  medium: { name: "중급", restTime: 8, faceCardValue: 10, isHardcore: false },
-  hard: { name: "고급", restTime: 3, faceCardValue: 10, isHardcore: false },
-  hardcore: {
-    name: "하드코어",
-    restTime: 0,
-    faceCardValue: 0,
-    isHardcore: true,
-  },
-};
+## TDS 사용 시 주의사항 (중요!)
+
+### 1. ThemeProvider 필수
+
+```tsx
+// main.tsx
+import { ThemeProvider } from "@toss/tds-mobile";
+
+<ThemeProvider>
+  <App />
+</ThemeProvider>;
 ```
 
-- 입문~고급: J,Q,K,A = 10회
-- 하드코어: J=11, Q=12, K=13, A=14회
+### 2. Button variant/color 제한
+
+```tsx
+// variant: 'fill' | 'weak' 만 지원 (outline, plain 없음!)
+// color: 'primary' | 'danger' | 'light' | 'dark'
+
+// ✅ 올바른 사용
+<Button variant="fill" color="primary">확인</Button>
+<Button variant="weak" color="primary">취소</Button>
+
+// ❌ 잘못된 사용 (에러 발생)
+<Button variant="outline" color="light">버튼</Button>
+<Button variant="plain" color="light">버튼</Button>
+```
+
+### 3. adaptive 색상
+
+```tsx
+import { adaptive } from "@toss/tds-colors";
+
+// ✅ 올바른 사용
+backgroundColor: adaptive.background; // 흰색/다크모드 자동 대응
+backgroundColor: adaptive.grey50;
+
+// ❌ 잘못된 사용 (존재하지 않음)
+backgroundColor: adaptive.white; // 없음!
+```
+
+### 4. Typography
+
+```tsx
+// 사용 가능: t1~t7, st1~st13
+<Text typography="t1">가장 큰 제목 (30px)</Text>
+<Text typography="t6">본문 (15px)</Text>
+<Text typography="t7">작은 텍스트 (13px)</Text>
+```
+
+### 5. FixedBottomCTA 사용법
+
+```tsx
+// ❌ .Single 없음
+<FixedBottomCTA.Single>버튼</FixedBottomCTA.Single>
+
+// ✅ 직접 사용 또는 일반 Button 사용
+<FixedBottomCTA>버튼</FixedBottomCTA>
+
+// 또는 직접 스타일링
+<div style={{ position: 'fixed', bottom: 0, ... }}>
+  <Button display="block">버튼</Button>
+</div>
+```
 
 ---
 
-## 다음 작업 (Phase 5: 테스트 및 마무리)
+## 이미지 에셋
+
+**위치:** `src/assets/` (기존 `assets/`에서 이동됨)
+
+```
+src/assets/
+├── icons/
+│   ├── squat_up.png, squat_down.png
+│   ├── situp_up.png, situp_down.png
+│   ├── burpee_up.png, burpee_down.png
+│   └── pushup_up.png, pushup_down.png
+└── logo/
+    └── logo.png
+```
+
+**import 방식 (Vite):**
+
+```tsx
+// constants/index.ts
+import squatUp from "../assets/icons/squat_up.png";
+export const EXERCISE_IMAGES = {
+  squat: { up: squatUp, down: squatDown },
+  // ...
+};
+```
+
+---
+
+## 다음 작업 (Phase 5)
+
+### 남은 작업
+
+1. **UI 스타일 정리** - 현재 일부 깨진 UI 수정 필요
+2. **전체 플로우 테스트** - 토스 앱에서 실제 테스트
+3. **버그 수정** - 발견되는 이슈 해결
+4. **최종 검수**
 
 ### 테스트 체크리스트
 
-- [ ] `yarn dev`로 전체 플로우 테스트
-- [ ] 각 난이도별 쉬는 시간 확인
-- [ ] 하드코어 모드 J,Q,K,A 숫자 확인 (11,12,13,14)
-- [ ] 52장 완료 시 축하 화면 → 결과 화면 전환 확인
-- [ ] 운동 애니메이션 정상 작동 확인 (1초 간격 up/down)
-- [ ] 일시정지/재개 기능 확인
-- [ ] 포기 시 결과 화면 이동 확인
-- [ ] 린트/타입 체크 통과 확인
-
-### 검증 플로우
-
-```
-1. LandingPage
-   - 난이도 5개 버튼 확인
-   - 선택 없이 시작 버튼 비활성화 확인
-   - 난이도 선택 후 시작 버튼 활성화 확인
-
-2. WorkoutPage
-   - 카드 UI 표시 확인 (문양, 숫자, 운동 이미지)
-   - 운동 이미지 1초 간격 애니메이션 확인
-   - 완료 버튼 클릭 시 쉬는 시간 화면 전환 확인
-   - 쉬는 시간 카운트다운 확인
-   - 일시정지/재개 기능 확인
-   - 포기 버튼 클릭 시 결과 화면 이동 확인
-
-3. CompletePage
-   - 축하 이모지 + 메시지 확인
-   - 통계 보기 버튼 → ResultPage 이동 확인
-   - 홈으로 버튼 → LandingPage 이동 확인
-
-4. ResultPage
-   - 운동별 횟수 표시 확인
-   - 총 운동/쉬는 시간 표시 확인
-   - 다시하기/홈으로 버튼 동작 확인
-```
+- [ ] LandingPage → DifficultySelectPage 전환
+- [ ] 난이도 선택 후 운동 시작
+- [ ] 운동 완료 → 쉬는 시간 → 다음 카드 전환
+- [ ] 52장 완료 시 CompletePage 표시
+- [ ] 통계 보기 → ResultPage 표시
+- [ ] 포기 버튼 동작
+- [ ] 홈으로/다시하기 버튼 동작
 
 ---
 
 ## 개발 명령어
 
 ```bash
-# 개발 서버
-yarn dev
-
-# 린트 검사
-yarn lint
-
-# 타입 체크
-yarn tsc --noEmit
-
-# 빌드
-yarn build
-
-# 배포 (토스)
-yarn deploy
+yarn dev          # 개발 서버
+yarn lint         # 린트 검사
+yarn tsc --noEmit # 타입 체크
+yarn build        # 빌드
+yarn deploy       # 배포 (토스)
 ```
-
----
-
-## 주의사항
-
-1. **TDS 사용 필수:** 가능한 모든 UI에 `@toss/tds-mobile` 컴포넌트 사용
-2. **any 타입 금지:** TypeScript strict 모드
-3. **린트 통과 필수:** 작업 후 `yarn lint` 실행
-4. **한국어 사용:** 앱 내 모든 텍스트는 한국어
 
 ---
 
 ## 참고 문서
 
-- [구현 계획서](./IMPLEMENTATION_PLAN.md) - Phase별 상세 내용
-- [TDS 문서](https://tossmini-docs.toss.im/tds-mobile/components/) - 컴포넌트 가이드
+- [TDS Typography](https://tossmini-docs.toss.im/tds-mobile/foundation/typography/)
+- [TDS 시작하기](https://tossmini-docs.toss.im/tds-mobile/start/)
 - [앱인토스 개발자센터](https://developers-apps-in-toss.toss.im/tutorials)
-
----
-
-## 이미지 에셋 위치
-
-```
-assets/icons/
-├── squat_up.png, squat_down.png     # 스쿼트
-├── situp_up.png, situp_down.png     # 싯업
-├── burpee_up.png, burpee_down.png   # 버피
-└── pushup_up.png, pushup_down.png   # 푸쉬업
-```
-
-CardContainer에서 1초 간격으로 up/down 이미지를 번갈아 표시함.

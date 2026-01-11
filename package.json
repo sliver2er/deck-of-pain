@@ -15,6 +15,7 @@
     "@emotion/react": "^11.14.0",
     "@toss/tds-colors": "^0.1.0",
     "@toss/tds-mobile": "^2.2.0",
+    "@toss/tds-mobile-ait": "^2.2.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0"
   },

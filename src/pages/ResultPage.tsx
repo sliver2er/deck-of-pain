@@ -16,7 +16,7 @@ function formatTime(seconds: number): string {
   return `${mins}분 ${secs}초`;
 }
 
-export function ResultPage({ stats, onRestart, onGoHome }: ResultPageProps) {
+export function ResultPage({ stats, onRestart }: ResultPageProps) {
   const exercises = [
     { key: "squat" as const, count: stats.squat },
     { key: "situp" as const, count: stats.situp },
@@ -58,13 +58,21 @@ export function ResultPage({ stats, onRestart, onGoHome }: ResultPageProps) {
               <Text typography="t5" color={adaptive.grey700}>
                 {EXERCISE_NAME[key]}
               </Text>
-              <Text typography="t5" fontWeight="semibold" color={adaptive.grey900}>
+              <Text
+                typography="t5"
+                fontWeight="semibold"
+                color={adaptive.grey900}
+              >
                 {count}회
               </Text>
             </div>
           ))}
           <div style={styles.totalRow}>
-            <Text typography="t5" fontWeight="semibold" color={adaptive.grey800}>
+            <Text
+              typography="t5"
+              fontWeight="semibold"
+              color={adaptive.grey800}
+            >
               총 운동 횟수
             </Text>
             <Text typography="t5" fontWeight="bold" color={adaptive.blue500}>
@@ -86,7 +94,11 @@ export function ResultPage({ stats, onRestart, onGoHome }: ResultPageProps) {
             <Text typography="t5" color={adaptive.grey700}>
               운동 시간
             </Text>
-            <Text typography="t5" fontWeight="semibold" color={adaptive.grey900}>
+            <Text
+              typography="t5"
+              fontWeight="semibold"
+              color={adaptive.grey900}
+            >
               {formatTime(stats.totalExerciseTime)}
             </Text>
           </div>
@@ -94,12 +106,20 @@ export function ResultPage({ stats, onRestart, onGoHome }: ResultPageProps) {
             <Text typography="t5" color={adaptive.grey700}>
               쉬는 시간
             </Text>
-            <Text typography="t5" fontWeight="semibold" color={adaptive.grey900}>
+            <Text
+              typography="t5"
+              fontWeight="semibold"
+              color={adaptive.grey900}
+            >
               {formatTime(stats.totalRestTime)}
             </Text>
           </div>
           <div style={styles.totalRow}>
-            <Text typography="t5" fontWeight="semibold" color={adaptive.grey800}>
+            <Text
+              typography="t5"
+              fontWeight="semibold"
+              color={adaptive.grey800}
+            >
               총 소요 시간
             </Text>
             <Text typography="t5" fontWeight="bold" color={adaptive.blue500}>
@@ -118,15 +138,6 @@ export function ResultPage({ stats, onRestart, onGoHome }: ResultPageProps) {
           onClick={onRestart}
         >
           다시하기
-        </Button>
-        <Button
-          size="xlarge"
-          variant="weak"
-          color="light"
-          display="block"
-          onClick={onGoHome}
-        >
-          홈으로
         </Button>
       </div>
     </div>
