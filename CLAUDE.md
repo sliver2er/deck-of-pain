@@ -11,3 +11,4 @@ eslintrc.js의 린팅 스타일을 지키고, 쓸데없이 많은 로그 메세�
 
 토스 앱인토스 개발자센터를 공식 문서로 참조하세요.
 https://developers-apps-in-toss.toss.im/tutorials
+UI, 컴포넌트 표현 시 되도록 apps-in-toss 의 Toss Desing System을 사용하세요.
