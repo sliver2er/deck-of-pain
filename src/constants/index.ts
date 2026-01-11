@@ -1,5 +1,14 @@
 import type { Difficulty, DifficultyConfig, Suit, ExerciseType } from '../types';
 
+import squatUp from '../assets/icons/squat_up.png';
+import squatDown from '../assets/icons/squat_down.png';
+import situpUp from '../assets/icons/situp_up.png';
+import situpDown from '../assets/icons/situp_down.png';
+import burpeeUp from '../assets/icons/burpee_up.png';
+import burpeeDown from '../assets/icons/burpee_down.png';
+import pushupUp from '../assets/icons/pushup_up.png';
+import pushupDown from '../assets/icons/pushup_down.png';
+
 export const DIFFICULTY_CONFIG: Record<Difficulty, DifficultyConfig> = {
   beginner: { name: '입문', restTime: 20, faceCardValue: 10, isHardcore: false },
   easy: { name: '초급', restTime: 15, faceCardValue: 10, isHardcore: false },
@@ -23,10 +32,10 @@ export const EXERCISE_NAME: Record<ExerciseType, string> = {
 };
 
 export const EXERCISE_IMAGES: Record<ExerciseType, { up: string; down: string }> = {
-  squat: { up: '/assets/icons/squat_up.png', down: '/assets/icons/squat_down.png' },
-  situp: { up: '/assets/icons/situp_up.png', down: '/assets/icons/situp_down.png' },
-  burpee: { up: '/assets/icons/burpee_up.png', down: '/assets/icons/burpee_down.png' },
-  pushup: { up: '/assets/icons/pushup_up.png', down: '/assets/icons/pushup_down.png' },
+  squat: { up: squatUp, down: squatDown },
+  situp: { up: situpUp, down: situpDown },
+  burpee: { up: burpeeUp, down: burpeeDown },
+  pushup: { up: pushupUp, down: pushupDown },
 };
 
 export const CARD_DISPLAY: Record<number, string> = {
