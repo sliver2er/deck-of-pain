@@ -1,13 +1,44 @@
 import { useState } from "react";
-import { Text, Button } from "@toss/tds-mobile";
-import { adaptive, colors } from "@toss/tds-colors";
+import { ListRow, Button } from "@toss/tds-mobile";
+import { adaptive } from "@toss/tds-colors";
 import type { Difficulty } from "../types";
-import { DIFFICULTY_CONFIG } from "../constants";
 
 interface DifficultySelectPageProps {
   onSelect: (difficulty: Difficulty) => void;
   onBack: () => void;
 }
+
+type DifficultyUIConfig =
+  | { iconName: string; iconUrl?: never; label: string; description: string }
+  | { iconName?: never; iconUrl: string; label: string; description: string };
+
+const DIFFICULTY_UI: Record<Difficulty, DifficultyUIConfig> = {
+  beginner: {
+    iconName: "icon-baby",
+    label: "입문자",
+    description: "처음 하는 분들도 해낼 수 있어요.",
+  },
+  easy: {
+    iconUrl: "https://static.toss.im/2d-emojis/png/4x/u263A.png",
+    label: "초보자",
+    description: "이 정도는 가뿐할 거예요.",
+  },
+  medium: {
+    iconUrl: "https://static.toss.im/2d-emojis/png/4x/u1F633.png",
+    label: "중급자",
+    description: "쉽지만은 않을 거예요.",
+  },
+  hard: {
+    iconUrl: "https://static.toss.im/2d-emojis/png/4x/u1F975.png",
+    label: "고급자",
+    description: "체력에 자신있으신가요?",
+  },
+  hardcore: {
+    iconUrl: "https://static.toss.im/2d-emojis/png/4x/u1F608.png",
+    label: "하드코어",
+    description: "도전해 보세요.. 하실 수 있다면.",
+  },
+};
 
 const DIFFICULTIES: Difficulty[] = [
   "beginner",
@@ -27,36 +58,61 @@ export function DifficultySelectPage({ onSelect }: DifficultySelectPageProps) {
     }
   };
 
+  const renderIcon = (ui: DifficultyUIConfig) => {
+    if ("iconName" in ui && ui.iconName) {
+      return <ListRow.AssetIcon shape="original" name={ui.iconName} />;
+    }
+    if ("iconUrl" in ui && ui.iconUrl) {
+      return <ListRow.AssetIcon shape="original" url={ui.iconUrl} />;
+    }
+    return null;
+  };
+
   return (
     <div style={styles.container}>
       <div style={styles.content}>
         <div style={styles.difficultyList}>
           {DIFFICULTIES.map((diff) => {
-            const config = DIFFICULTY_CONFIG[diff];
+            const ui = DIFFICULTY_UI[diff];
             const isSelected = selectedDifficulty === diff;
             return (
-              <Button
+              <div
                 key={diff}
-                size="large"
-                variant={isSelected ? "fill" : "weak"}
-                color="primary"
-                display="block"
                 onClick={() => setSelectedDifficulty(diff)}
                 style={{
-                  justifyContent: "space-between",
-                  padding: "16px 20px",
+                  ...styles.listRowWrapper,
+                  backgroundColor: isSelected
+                    ? adaptive.grey100
+                    : "transparent",
+                  borderRadius: "12px",
+                  cursor: "pointer",
                 }}
               >
-                <span style={{ fontWeight: 600 }}>{config.name}</span>
-                <Text
-                  typography="t7"
-                  color={isSelected ? colors.white : adaptive.grey400}
-                >
-                  {config.restTime > 0
-                    ? `쉬는시간 ${config.restTime}초`
-                    : "쉬는시간 없음"}
-                </Text>
-              </Button>
+                <ListRow
+                  left={renderIcon(ui)}
+                  contents={
+                    <ListRow.Texts
+                      type="2RowTypeA"
+                      top={ui.label}
+                      topProps={{
+                        color: adaptive.grey700,
+                        fontWeight: "bold",
+                      }}
+                      bottom={ui.description}
+                      bottomProps={{ color: adaptive.grey600 }}
+                    />
+                  }
+                  right={
+                    isSelected ? (
+                      <ListRow.AssetIcon
+                        shape="original"
+                        url="https://static.toss.im/2d-emojis/png/4x/u2705.png"
+                      />
+                    ) : undefined
+                  }
+                  verticalPadding="large"
+                />
+              </div>
             );
           })}
         </div>
@@ -85,30 +141,18 @@ const styles: Record<string, React.CSSProperties> = {
     display: "flex",
     flexDirection: "column",
   },
-  header: {
-    position: "relative",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    padding: "16px 20px",
-    borderBottom: `1px solid ${adaptive.grey100}`,
-  },
   content: {
     flex: 1,
-    padding: "24px 20px",
+    padding: "16px 20px",
     paddingBottom: "100px",
   },
   difficultyList: {
     display: "flex",
     flexDirection: "column",
-    gap: "12px",
+    gap: "8px",
   },
-  hint: {
-    marginTop: "24px",
-    padding: "16px",
-    backgroundColor: adaptive.grey50,
-    borderRadius: "12px",
-    textAlign: "center",
+  listRowWrapper: {
+    transition: "background-color 0.15s ease",
   },
   bottomCTA: {
     position: "fixed",

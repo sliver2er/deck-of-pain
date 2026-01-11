@@ -1,4 +1,4 @@
-import { Text, Button } from "@toss/tds-mobile";
+import { Post, Paragraph, Button } from "@toss/tds-mobile";
 import { adaptive } from "@toss/tds-colors";
 import logo from "../assets/logo/logo.png";
 
@@ -11,34 +11,61 @@ export function LandingPage({ onNext }: LandingPageProps) {
     <div style={styles.container}>
       <div style={styles.content}>
         <div style={styles.header}>
-          <Text typography="t1" fontWeight="bold">
-            고통의 카드팩
-          </Text>
-          <br />
-          <Text typography="t6" style={{ marginTop: 8 }} color={adaptive.grey500}>
-            트럼프 카드로 홈트하기
-          </Text>
-        </div>
+          <Paragraph typography="t1" fontWeight="bold">
+            <Paragraph.Text>고통의 카드팩</Paragraph.Text>
+          </Paragraph>
 
-        <div style={styles.iconWrapper}>
+          <Paragraph typography="t4" color={adaptive.grey500}>
+            <Paragraph.Text>트럼프 카드로 홈트하기</Paragraph.Text>
+          </Paragraph>
           <img src={logo} alt="logo" style={styles.icon} />
         </div>
+        <Paragraph typography="t2" fontWeight="bold">
+          <Paragraph.Text>고통의 카드팩이란?</Paragraph.Text>
+        </Paragraph>
+        <>
+          <Post.Paragraph
+            paddingBottom={24}
+            aria-label={
+              <>
+                트럼프 카드를 이용한 재미있는 맨몸운동이예요.\n뽑은 트럼프
+                카드의 문양에 따라\n \n - <b style={{}}>스페이드</b>는 스쿼트,
+                \n -<b style={{}}>클로바</b>는 윗몸 일으키기, \n -
+                <b style={{}}>하트</b>는 버피, \n -<b style={{}}>다이아몬드</b>
+                는 푸쉬업을 수행해요. \n \n개수는
+                <b style={{}}>카드에 적힌 숫자</b>
+                만큼 수행하고, \n총 13x4 = 52번의 세트를 수행하는 운동
+                방식이예요.
+              </>
+            }
+          >
+            <Paragraph.Text>
+              트럼프 카드를 이용한 재미있는 맨몸운동이예요.
+              <br />
+              뽑은 트럼프 카드의 문양에 따라
+              <br />
+              <br />-<b style={{}}>스페이드</b>
+              는 스쿼트,
+              <br />-<b style={{}}>클로바</b>
+              는 윗몸 일으키기,
+              <br />-<b style={{}}>하트</b>
+              는 버피,
+              <br />-<b style={{}}>다이아몬드</b>
+              는 푸쉬업을 수행해요.
+              <br />
+              <br />
+              개수는
+              <b style={{}}>카드에 적힌 숫자</b>
+              만큼 수행하고,
+              <br />총 13x4 = 52번의 세트를 수행해요.
+            </Paragraph.Text>
+          </Post.Paragraph>
+        </>
 
-        <div style={styles.description}>
-          <Text typography="t6" color={adaptive.grey600} style={{ lineHeight: 1.6 }}>
-            트럼프 카드를 이용한 재미있는 맨몸운동이에요.
-            <br />
-            <br />
-            뽑은 트럼프 카드의 문양에 따라
-            <br />• <b>스페이드</b>는 스쿼트
-            <br />• <b>클로버</b>는 싯업
-            <br />• <b>하트</b>는 버피
-            <br />• <b>다이아몬드</b>는 푸쉬업
-            <br />
-            <br />
-            개수는 <b>카드에 적힌 숫자</b>만큼 수행하고,
-            <br />총 52장의 카드를 모두 소진하면 완료!
-          </Text>
+        <div style={styles.ruleBox}>
+          <Paragraph typography="st6" color={adaptive.grey600}>
+            <Paragraph.Text>뽑은 카드 숫자만큼 운동해요</Paragraph.Text>
+          </Paragraph>
         </div>
       </div>
 
@@ -66,25 +93,47 @@ const styles: Record<string, React.CSSProperties> = {
   },
   content: {
     flex: 1,
-    padding: "40px 20px",
-    paddingBottom: "100px",
+    padding: "48px 24px",
+    paddingBottom: "120px",
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
   },
   header: {
     textAlign: "center",
-    marginBottom: "32px",
-  },
-  iconWrapper: {
-    marginBottom: "32px",
+    marginBottom: "16px",
+    gap: "8px",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
   },
   icon: {
-    width: "100px",
-    height: "100px",
+    width: "132px",
+    height: "132px",
     borderRadius: "20px",
+    marginBottom: "20px",
   },
-  description: {
+  exerciseTable: {
+    width: "100%",
+    display: "grid",
+    gridTemplateColumns: "1fr 1fr",
+    backgroundColor: adaptive.grey50,
+    borderRadius: "16px",
+    overflow: "hidden",
+    marginBottom: "24px",
+  },
+  exerciseCell: {
+    padding: "20px",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    gap: "6px",
+  },
+  symbol: {
+    fontSize: "32px",
+    lineHeight: 1,
+  },
+  ruleBox: {
     textAlign: "center",
   },
   bottomCTA: {
