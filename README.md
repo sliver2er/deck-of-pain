@@ -1,73 +1,73 @@
-# React + TypeScript + Vite
+# 고통의 카드팩 💪
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+트럼프 카드 52장을 이용한 맨몸운동 앱
 
-Currently, two official plugins are available:
+## 개요
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+트럼프 카드를 뽑아 문양에 따라 운동을 수행하는 재미있는 홈트레이닝 앱입니다.
 
-## React Compiler
+| 문양 | 운동 |
+|------|------|
+| ♠ 스페이드 | 스쿼트 |
+| ♣ 클로버 | 싯업 |
+| ♥ 하트 | 버피 |
+| ♦ 다이아몬드 | 푸쉬업 |
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+카드에 적힌 숫자만큼 운동을 수행하고, 52장을 모두 소진하면 완료!
 
-## Expanding the ESLint configuration
+## 기술 스택
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- React 19 + TypeScript + Vite
+- @apps-in-toss/web-framework
+- @toss/tds-mobile (Toss Design System)
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 시작하기
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+```bash
+# 의존성 설치
+yarn install
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+# 개발 서버 실행
+yarn dev
+
+# 빌드
+yarn build
+
+# 배포 (토스 앱인토스)
+yarn deploy
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 프로젝트 구조
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
 ```
+src/
+├── pages/           # 페이지 컴포넌트
+│   ├── LandingPage.tsx
+│   └── WorkoutPage.tsx
+├── components/      # 재사용 컴포넌트
+│   ├── CardContainer.tsx
+│   ├── RestTimer.tsx
+│   └── ProgressIndicator.tsx
+├── hooks/           # 커스텀 훅
+│   ├── useDeck.ts
+│   ├── useTimer.ts
+│   └── useWorkoutSession.ts
+├── types/           # 타입 정의
+├── constants/       # 상수
+└── utils/           # 유틸리티 함수
+```
+
+## 난이도
+
+| 난이도 | 쉬는시간 | J,Q,K,A |
+|--------|----------|---------|
+| 입문 | 20초 | 10 |
+| 초급 | 15초 | 10 |
+| 중급 | 8초 | 10 |
+| 고급 | 3초 | 10 |
+| 하드코어 | 0초 | 11,12,13,14 |
+
+## 문서
+
+- [온보딩 가이드](./docs/ONBOARDING.md) - 다음 개발자를 위한 상세 가이드
+- [구현 계획서](./docs/IMPLEMENTATION_PLAN.md) - Phase별 구현 진행 현황

@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Text } from '@toss/tds-mobile';
 import type { Card, ExerciseType } from '../types';
 import { SUIT_SYMBOL, SUIT_COLOR, EXERCISE_IMAGES } from '../constants';
 
@@ -25,8 +26,12 @@ export function CardContainer({ card, exerciseType }: CardContainerProps) {
   return (
     <div style={styles.card}>
       <div style={styles.cornerTopLeft}>
-        <span style={{ ...styles.value, color }}>{card.display}</span>
-        <span style={{ ...styles.suit, color }}>{symbol}</span>
+        <Text typography="t3" fontWeight="bold" style={{ color, lineHeight: 1 }}>
+          {card.display}
+        </Text>
+        <Text typography="t4" style={{ color, lineHeight: 1, marginTop: 4 }}>
+          {symbol}
+        </Text>
       </div>
 
       <div style={styles.center}>
@@ -38,8 +43,12 @@ export function CardContainer({ card, exerciseType }: CardContainerProps) {
       </div>
 
       <div style={styles.cornerBottomRight}>
-        <span style={{ ...styles.value, color }}>{card.display}</span>
-        <span style={{ ...styles.suit, color }}>{symbol}</span>
+        <Text typography="t3" fontWeight="bold" style={{ color, lineHeight: 1 }}>
+          {card.display}
+        </Text>
+        <Text typography="t4" style={{ color, lineHeight: 1, marginTop: 4 }}>
+          {symbol}
+        </Text>
       </div>
     </div>
   );
@@ -73,16 +82,6 @@ const styles: Record<string, React.CSSProperties> = {
     flexDirection: 'column',
     alignItems: 'center',
     transform: 'rotate(180deg)',
-  },
-  value: {
-    fontSize: '28px',
-    fontWeight: 'bold',
-    lineHeight: 1,
-  },
-  suit: {
-    fontSize: '24px',
-    lineHeight: 1,
-    marginTop: '4px',
   },
   center: {
     display: 'flex',

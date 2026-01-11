@@ -1,3 +1,6 @@
+import { Text, Button } from '@toss/tds-mobile';
+import { adaptive } from '@toss/tds-colors';
+
 interface RestTimerProps {
   timeLeft: number;
   totalTime: number;
@@ -18,7 +21,7 @@ export function RestTimer({ timeLeft, totalTime, onSkip }: RestTimerProps) {
             cy="60"
             r="45"
             fill="none"
-            stroke="#E5E5E5"
+            stroke={adaptive.greyOpacity100}
             strokeWidth="8"
           />
           <circle
@@ -26,7 +29,7 @@ export function RestTimer({ timeLeft, totalTime, onSkip }: RestTimerProps) {
             cy="60"
             r="45"
             fill="none"
-            stroke="#3182F6"
+            stroke={adaptive.blue500}
             strokeWidth="8"
             strokeLinecap="round"
             strokeDasharray={circumference}
@@ -35,17 +38,28 @@ export function RestTimer({ timeLeft, totalTime, onSkip }: RestTimerProps) {
           />
         </svg>
         <div style={styles.timeDisplay}>
-          <span style={styles.timeText}>{timeLeft}</span>
-          <span style={styles.unitText}>초</span>
+          <Text typography="t1" fontWeight="bold" color={adaptive.grey900}>
+            {timeLeft}
+          </Text>
+          <Text typography="t6" color={adaptive.grey500}>
+            초
+          </Text>
         </div>
       </div>
 
-      <p style={styles.label}>쉬는 시간</p>
+      <Text typography="t5" color={adaptive.grey600}>
+        쉬는 시간
+      </Text>
 
       {onSkip && (
-        <button onClick={onSkip} style={styles.skipButton}>
+        <Button
+          size="medium"
+          variant="weak"
+          color="primary"
+          onClick={onSkip}
+        >
           건너뛰기
-        </button>
+        </Button>
       )}
     </div>
   );
@@ -77,29 +91,5 @@ const styles: Record<string, React.CSSProperties> = {
     display: 'flex',
     alignItems: 'baseline',
     gap: '2px',
-  },
-  timeText: {
-    fontSize: '32px',
-    fontWeight: 'bold',
-    color: '#191F28',
-  },
-  unitText: {
-    fontSize: '16px',
-    color: '#6B7684',
-  },
-  label: {
-    fontSize: '16px',
-    color: '#6B7684',
-    margin: 0,
-  },
-  skipButton: {
-    padding: '12px 24px',
-    fontSize: '16px',
-    fontWeight: '600',
-    color: '#3182F6',
-    backgroundColor: 'transparent',
-    border: '1px solid #3182F6',
-    borderRadius: '8px',
-    cursor: 'pointer',
   },
 };
