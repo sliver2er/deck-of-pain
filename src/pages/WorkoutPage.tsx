@@ -148,7 +148,7 @@ const styles: Record<string, React.CSSProperties> = {
   },
   header: {
     padding: '20px',
-    backgroundColor: adaptive.white,
+    backgroundColor: adaptive.background,
   },
   main: {
     flex: 1,
@@ -168,7 +168,7 @@ const styles: Record<string, React.CSSProperties> = {
   footer: {
     padding: '20px',
     paddingBottom: '34px',
-    backgroundColor: adaptive.white,
+    backgroundColor: adaptive.background,
     display: 'flex',
     flexDirection: 'column',
     gap: '12px',

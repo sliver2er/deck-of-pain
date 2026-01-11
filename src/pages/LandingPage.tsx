@@ -1,11 +1,5 @@
 import { useState } from "react";
-import {
-  Text,
-  Button,
-  FixedBottomCTA,
-  Post,
-  Paragraph,
-} from "@toss/tds-mobile";
+import { Text, Button, Post, Paragraph } from "@toss/tds-mobile";
 import { adaptive } from "@toss/tds-colors";
 import type { Difficulty } from "../types";
 import { DIFFICULTY_CONFIG } from "../constants";
@@ -99,13 +93,18 @@ export function LandingPage({ onStart }: LandingPageProps) {
         </div>
       </div>
 
-      <FixedBottomCTA.Single
-        loading={false}
-        disabled={!selectedDifficulty}
-        onClick={handleStart}
-      >
-        시작하기
-      </FixedBottomCTA.Single>
+      <div style={styles.bottomCTA}>
+        <Button
+          size="xlarge"
+          variant="fill"
+          color="primary"
+          display="block"
+          disabled={!selectedDifficulty}
+          onClick={handleStart}
+        >
+          시작하기
+        </Button>
+      </div>
     </div>
   );
 }
@@ -113,7 +112,7 @@ export function LandingPage({ onStart }: LandingPageProps) {
 const styles: Record<string, React.CSSProperties> = {
   container: {
     minHeight: "100vh",
-    backgroundColor: adaptive.white,
+    backgroundColor: adaptive.background,
   },
   content: {
     padding: "24px 20px",
@@ -133,5 +132,13 @@ const styles: Record<string, React.CSSProperties> = {
     flexDirection: "column",
     gap: "12px",
     marginTop: "12px",
+  },
+  bottomCTA: {
+    position: "fixed",
+    bottom: 0,
+    left: 0,
+    right: 0,
+    padding: "12px 20px 34px",
+    backgroundColor: adaptive.background,
   },
 };
