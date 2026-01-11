@@ -17,7 +17,7 @@
 |-------|------|------|
 | 1 | 기본 구조 세팅 | ✅ 완료 |
 | 2 | 핵심 로직 구현 | ✅ 완료 |
-| 3 | 컴포넌트 구현 | ⏳ 대기 |
+| 3 | 컴포넌트 구현 | ✅ 완료 |
 | 4 | 페이지 구현 | ⏳ 대기 |
 | 5 | 테스트 및 마무리 | ⏳ 대기 |
 
@@ -172,9 +172,9 @@ src/
 
 ## 체크리스트
 
-- [ ] 3.1 CardContainer 컴포넌트
-- [ ] 3.2 RestTimer 컴포넌트
-- [ ] 3.3 ProgressIndicator 컴포넌트
+- [x] 3.1 CardContainer 컴포넌트
+- [x] 3.2 RestTimer 컴포넌트
+- [x] 3.3 ProgressIndicator 컴포넌트
 
 ### 3.1 CardContainer 디자인
 ```
@@ -206,6 +206,17 @@ src/
 - 진행 상황 (n/52)
 - 현재 운동 정보
 
+### Phase 3 완료 기록 (2025-01-12)
+
+**생성된 파일:**
+| 파일 | 설명 |
+|------|------|
+| `src/components/CardContainer.tsx` | 트럼프 카드 UI + 운동 애니메이션 (1초 간격 up/down) |
+| `src/components/RestTimer.tsx` | 원형 프로그레스 바 + 카운트다운 + 건너뛰기 버튼 |
+| `src/components/ProgressIndicator.tsx` | 진행률 표시 (n/52 + 프로그레스 바) |
+
+**검증:** TypeScript 타입 체크 통과, ESLint 린트 통과
+
 ---
 
 # Phase 4: 페이지 구현
@@ -214,8 +225,9 @@ src/
 
 - [ ] 4.1 LandingPage
 - [ ] 4.2 WorkoutPage
-- [ ] 4.3 ResultPage
-- [ ] 4.4 App.tsx 라우팅
+- [ ] 4.3 CompletePage (축하 화면)
+- [ ] 4.4 ResultPage (상세 통계)
+- [ ] 4.5 App.tsx 라우팅
 
 ### 4.1 LandingPage
 - 앱 로고/이모지
@@ -225,11 +237,17 @@ src/
 
 ### 4.2 WorkoutPage
 - 상단: ProgressIndicator
-- 중앙: CardContainer
+- 중앙: CardContainer / RestTimer
 - 하단: 운동 이름 + 남은 횟수
 - 일시정지/포기 기능
 
-### 4.3 ResultPage
+### 4.3 CompletePage (축하 화면)
+- 축하 이모지/애니메이션
+- "수고하셨습니다!" 메시지
+- "통계 보기" 버튼 → ResultPage로 이동
+- "홈으로" 버튼 → LandingPage로 이동
+
+### 4.4 ResultPage (상세 통계)
 - 운동별 총 횟수
 - 총 운동 시간
 - 총 쉬는 시간
