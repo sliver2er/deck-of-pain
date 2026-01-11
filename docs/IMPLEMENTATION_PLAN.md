@@ -16,7 +16,7 @@
 | Phase | 내용 | 상태 |
 |-------|------|------|
 | 1 | 기본 구조 세팅 | ✅ 완료 |
-| 2 | 핵심 로직 구현 | ⏳ 대기 |
+| 2 | 핵심 로직 구현 | ✅ 완료 |
 | 3 | 컴포넌트 구현 | ⏳ 대기 |
 | 4 | 페이지 구현 | ⏳ 대기 |
 | 5 | 테스트 및 마무리 | ⏳ 대기 |
@@ -118,10 +118,10 @@ src/
 
 ## 체크리스트
 
-- [ ] 2.1 카드 덱 유틸리티 (utils/deck.ts)
-- [ ] 2.2 useDeck 훅 (hooks/useDeck.ts)
-- [ ] 2.3 useTimer 훅 (hooks/useTimer.ts)
-- [ ] 2.4 useWorkoutSession 훅 (hooks/useWorkoutSession.ts)
+- [x] 2.1 카드 덱 유틸리티 (utils/deck.ts)
+- [x] 2.2 useDeck 훅 (hooks/useDeck.ts)
+- [x] 2.3 useTimer 훅 (hooks/useTimer.ts)
+- [x] 2.4 useWorkoutSession 훅 (hooks/useWorkoutSession.ts)
 
 ### 2.1 카드 덱 유틸리티
 - createDeck(): 52장 카드 생성
@@ -142,6 +142,29 @@ src/
 ### 2.4 useWorkoutSession 훅
 - 전체 운동 세션 상태 관리
 - 현재 카드, 페이즈, 통계 통합
+
+### Phase 2 완료 기록 (2025-01-12)
+
+**생성된 파일:**
+| 파일 | 설명 |
+|------|------|
+| `src/utils/deck.ts` | createDeck, shuffleDeck, getExerciseCount 함수 |
+| `src/hooks/useDeck.ts` | 카드 덱 상태 관리 훅 |
+| `src/hooks/useTimer.ts` | useStopwatch, useCountdown 훅 |
+| `src/hooks/useWorkoutSession.ts` | 전체 세션 관리 훅 (일시정지, 포기 포함) |
+
+**주요 기능:**
+- Fisher-Yates 셔플 알고리즘
+- 난이도별 J,Q,K,A 숫자 계산
+- 일시정지/재개 기능
+- 포기 시 부분 통계 유지
+- 쉬는 시간 카운트다운 + 자동 다음 카드
+
+**검증:** TypeScript 타입 체크 통과, ESLint 린트 통과
+
+**수정 사항 (린트 오류 해결):**
+- `useTimer.ts`: ref 업데이트를 useEffect 안으로 이동
+- `useWorkoutSession.ts`: useCountdown 대신 직접 interval 관리로 변경 (effect 내 setState 문제 해결)
 
 ---
 
