@@ -1,7 +1,7 @@
 import { Text, Button } from "@toss/tds-mobile";
 import { adaptive } from "@toss/tds-colors";
 import type { WorkoutStats } from "../types";
-import { EXERCISE_NAME } from "../constants";
+import { EXERCISE_LABEL } from "../constants";
 
 interface ResultPageProps {
   stats: WorkoutStats;
@@ -55,7 +55,7 @@ export function ResultPage({ stats, onRestart }: ResultPageProps) {
           {exercises.map(({ key, count }) => (
             <div key={key} style={styles.statRow}>
               <Text typography="t5" color={adaptive.grey700}>
-                {EXERCISE_NAME[key]}
+                {EXERCISE_LABEL[key]}
               </Text>
               <Text
                 typography="t5"

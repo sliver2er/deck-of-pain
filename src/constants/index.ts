@@ -17,14 +17,14 @@ export const DIFFICULTY_CONFIG: Record<Difficulty, DifficultyConfig> = {
   hardcore: { name: '하드코어', restTime: 0, faceCardValue: 0, isHardcore: true },
 };
 
-export const SUIT_TO_EXERCISE: Record<Suit, ExerciseType> = {
+export const SUIT_EXERCISE_MAP: Record<Suit, ExerciseType> = {
   spade: 'squat',
   club: 'situp',
   heart: 'burpee',
   diamond: 'pushup',
 };
 
-export const EXERCISE_NAME: Record<ExerciseType, string> = {
+export const EXERCISE_LABEL: Record<ExerciseType, string> = {
   squat: '스쿼트',
   situp: '싯업',
   burpee: '버피',
@@ -38,7 +38,7 @@ export const EXERCISE_IMAGES: Record<ExerciseType, { up: string; down: string }>
   pushup: { up: pushupUp, down: pushupDown },
 };
 
-export const CARD_DISPLAY: Record<number, string> = {
+export const CARD_VALUE_LABEL: Record<number, string> = {
   1: 'A',
   2: '2',
   3: '3',

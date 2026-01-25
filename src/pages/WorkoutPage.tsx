@@ -4,7 +4,7 @@ import type { Card, ExerciseType, Difficulty } from "../types";
 import { CardContainer } from "../components/CardContainer";
 import { RestTimer } from "../components/RestTimer";
 import { ProgressIndicator } from "../components/ProgressIndicator";
-import { EXERCISE_NAME, DIFFICULTY_CONFIG } from "../constants";
+import { EXERCISE_LABEL, DIFFICULTY_CONFIG } from "../constants";
 
 interface WorkoutPageProps {
   phase: "exercise" | "rest";
@@ -51,7 +51,7 @@ export function WorkoutPage({
             <CardContainer card={currentCard} exerciseType={currentExercise} />
             <div style={styles.exerciseInfo}>
               <Text typography="t4" fontWeight="bold" color={adaptive.grey900}>
-                {EXERCISE_NAME[currentExercise]}
+                {EXERCISE_LABEL[currentExercise]}
               </Text>
               <Text typography="t1" fontWeight="bold" color={adaptive.blue500}>
                 {exerciseCount}회

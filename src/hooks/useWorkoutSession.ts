@@ -1,6 +1,6 @@
 import { useState, useCallback, useEffect, useRef } from 'react';
 import type { Card, Difficulty, SessionPhase, WorkoutStats, ExerciseType } from '../types';
-import { DIFFICULTY_CONFIG, SUIT_TO_EXERCISE } from '../constants';
+import { DIFFICULTY_CONFIG, SUIT_EXERCISE_MAP } from '../constants';
 import { createShuffledDeck, getExerciseCount } from '../utils/deck';
 import { useStopwatch } from './useTimer';
 
@@ -24,7 +24,7 @@ interface UseWorkoutSessionReturn {
   reset: () => void;
 }
 
-const initialStats: WorkoutStats = {
+const INITIAL_STATS: WorkoutStats = {
   squat: 0,
   situp: 0,
   burpee: 0,
@@ -39,7 +39,7 @@ export function useWorkoutSession(): UseWorkoutSessionReturn {
   const [difficulty, setDifficulty] = useState<Difficulty>('beginner');
   const [deck, setDeck] = useState<Card[]>([]);
   const [currentCard, setCurrentCard] = useState<Card | null>(null);
-  const [stats, setStats] = useState<WorkoutStats>(initialStats);
+  const [stats, setStats] = useState<WorkoutStats>(INITIAL_STATS);
   const [isPaused, setIsPaused] = useState(false);
   const [exerciseStartTime, setExerciseStartTime] = useState(0);
   const [restTime, setRestTime] = useState(0);
@@ -47,7 +47,7 @@ export function useWorkoutSession(): UseWorkoutSessionReturn {
   const exerciseTimer = useStopwatch();
   const restIntervalRef = useRef<number | null>(null);
 
-  const config = DIFFICULTY_CONFIG[difficulty];
+  const difficultyConfig = DIFFICULTY_CONFIG[difficulty];
 
   const clearRestInterval = useCallback(() => {
     if (restIntervalRef.current) {
@@ -98,7 +98,7 @@ export function useWorkoutSession(): UseWorkoutSessionReturn {
 
   const startSession = useCallback((selectedDifficulty: Difficulty) => {
     setDifficulty(selectedDifficulty);
-    setStats(initialStats);
+    setStats(INITIAL_STATS);
     setIsPaused(false);
     clearRestInterval();
 
@@ -118,7 +118,7 @@ export function useWorkoutSession(): UseWorkoutSessionReturn {
     exerciseTimer.stop();
     const exerciseDuration = Math.floor((Date.now() - exerciseStartTime) / 1000);
 
-    const exerciseType = SUIT_TO_EXERCISE[currentCard.suit];
+    const exerciseType = SUIT_EXERCISE_MAP[currentCard.suit];
     const count = getExerciseCount(currentCard, difficulty);
 
     setStats((prev) => ({
@@ -140,7 +140,7 @@ export function useWorkoutSession(): UseWorkoutSessionReturn {
   const skipRest = useCallback(() => {
     if (phase !== 'rest') return;
 
-    const usedRestTime = config.restTime - restTime;
+    const usedRestTime = difficultyConfig.restTime - restTime;
     setStats((prev) => ({
       ...prev,
       totalRestTime: prev.totalRestTime + usedRestTime,
@@ -148,7 +148,7 @@ export function useWorkoutSession(): UseWorkoutSessionReturn {
 
     clearRestInterval();
     drawNextCard();
-  }, [phase, restTime, config.restTime, clearRestInterval, drawNextCard]);
+  }, [phase, restTime, difficultyConfig.restTime, clearRestInterval, drawNextCard]);
 
   const pause = useCallback(() => {
     setIsPaused(true);
@@ -170,7 +170,7 @@ export function useWorkoutSession(): UseWorkoutSessionReturn {
             clearRestInterval();
             setStats((s) => ({
               ...s,
-              totalRestTime: s.totalRestTime + config.restTime,
+              totalRestTime: s.totalRestTime + difficultyConfig.restTime,
             }));
             drawNextCard();
             return 0;
@@ -179,7 +179,7 @@ export function useWorkoutSession(): UseWorkoutSessionReturn {
         });
       }, 1000);
     }
-  }, [phase, exerciseTimer, restTime, config.restTime, clearRestInterval, drawNextCard]);
+  }, [phase, exerciseTimer, restTime, difficultyConfig.restTime, clearRestInterval, drawNextCard]);
 
   const quit = useCallback(() => {
     exerciseTimer.stop();
@@ -191,7 +191,7 @@ export function useWorkoutSession(): UseWorkoutSessionReturn {
     setPhase('ready');
     setDeck([]);
     setCurrentCard(null);
-    setStats(initialStats);
+    setStats(INITIAL_STATS);
     setIsPaused(false);
     setRestTime(0);
     exerciseTimer.reset();
@@ -204,7 +204,7 @@ export function useWorkoutSession(): UseWorkoutSessionReturn {
     };
   }, [clearRestInterval]);
 
-  const currentExercise = currentCard ? SUIT_TO_EXERCISE[currentCard.suit] : null;
+  const currentExercise = currentCard ? SUIT_EXERCISE_MAP[currentCard.suit] : null;
   const exerciseCount = currentCard ? getExerciseCount(currentCard, difficulty) : 0;
 
   return {

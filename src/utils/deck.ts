@@ -1,5 +1,5 @@
 import type { Card, CardValue, Suit, Difficulty } from '../types';
-import { CARD_DISPLAY, DIFFICULTY_CONFIG } from '../constants';
+import { CARD_VALUE_LABEL, DIFFICULTY_CONFIG } from '../constants';
 
 const SUITS: Suit[] = ['spade', 'club', 'heart', 'diamond'];
 const VALUES: CardValue[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
@@ -12,7 +12,7 @@ export function createDeck(): Card[] {
       deck.push({
         suit,
         value,
-        display: CARD_DISPLAY[value],
+        display: CARD_VALUE_LABEL[value],
       });
     }
   }
