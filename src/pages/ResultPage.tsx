@@ -6,7 +6,6 @@ import { EXERCISE_NAME } from "../constants";
 interface ResultPageProps {
   stats: WorkoutStats;
   onRestart: () => void;
-  onGoHome: () => void;
 }
 
 function formatTime(seconds: number): string {

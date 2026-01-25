@@ -17,10 +17,6 @@ function App() {
     setPage("difficulty");
   };
 
-  const handleBack = () => {
-    setPage("landing");
-  };
-
   const handleSelectDifficulty = (difficulty: Difficulty) => {
     session.startSession(difficulty);
     setPage("workout");
@@ -45,28 +41,15 @@ function App() {
   }
 
   if (page === "difficulty") {
-    return (
-      <DifficultySelectPage
-        onSelect={handleSelectDifficulty}
-        onBack={handleBack}
-      />
-    );
+    return <DifficultySelectPage onSelect={handleSelectDifficulty} />;
   }
 
   if (page === "result") {
-    return (
-      <ResultPage
-        stats={session.stats}
-        onRestart={handleGoHome}
-        onGoHome={handleGoHome}
-      />
-    );
+    return <ResultPage stats={session.stats} onRestart={handleGoHome} />;
   }
 
   if (session.phase === "complete" || page === "complete") {
-    return (
-      <CompletePage onViewStats={handleViewStats} onGoHome={handleGoHome} />
-    );
+    return <CompletePage onViewStats={handleViewStats} />;
   }
 
   if (!session.currentCard || !session.currentExercise) {
@@ -86,7 +69,6 @@ function App() {
       difficulty={session.difficulty}
       onComplete={session.completeExercise}
       onSkipRest={session.skipRest}
-      onPause={session.pause}
       onResume={session.resume}
       onQuit={handleQuit}
     />

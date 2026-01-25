@@ -18,7 +18,6 @@ interface WorkoutPageProps {
   difficulty: Difficulty;
   onComplete: () => void;
   onSkipRest: () => void;
-  onPause: () => void;
   onResume: () => void;
   onQuit: () => void;
 }

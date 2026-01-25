@@ -23,44 +23,42 @@ export function LandingPage({ onNext }: LandingPageProps) {
         <Paragraph typography="t2" fontWeight="bold">
           <Paragraph.Text>고통의 카드팩이란?</Paragraph.Text>
         </Paragraph>
-        <>
-          <Post.Paragraph
-            paddingBottom={24}
-            aria-label={
-              <>
-                트럼프 카드를 이용한 재미있는 맨몸운동이예요.\n뽑은 트럼프
-                카드의 문양에 따라\n \n - <b style={{}}>스페이드</b>는 스쿼트,
-                \n -<b style={{}}>클로바</b>는 윗몸 일으키기, \n -
-                <b style={{}}>하트</b>는 버피, \n -<b style={{}}>다이아몬드</b>
-                는 푸쉬업을 수행해요. \n \n개수는
-                <b style={{}}>카드에 적힌 숫자</b>
-                만큼 수행하고, \n총 13x4 = 52번의 세트를 수행하는 운동
-                방식이예요.
-              </>
-            }
-          >
-            <Paragraph.Text>
-              트럼프 카드를 이용한 재미있는 맨몸운동이예요.
-              <br />
-              뽑은 트럼프 카드의 문양에 따라
-              <br />
-              <br />-<b style={{}}>스페이드</b>
-              는 스쿼트,
-              <br />-<b style={{}}>클로바</b>
-              는 윗몸 일으키기,
-              <br />-<b style={{}}>하트</b>
-              는 버피,
-              <br />-<b style={{}}>다이아몬드</b>
-              는 푸쉬업을 수행해요.
-              <br />
-              <br />
-              개수는
-              <b style={{}}>카드에 적힌 숫자</b>
-              만큼 수행하고,
-              <br />총 13x4 = 52번의 세트를 수행해요.
-            </Paragraph.Text>
-          </Post.Paragraph>
-        </>
+        <Post.Paragraph
+          paddingBottom={24}
+          aria-label={
+            <>
+              트럼프 카드를 이용한 재미있는 맨몸운동이예요.\n뽑은 트럼프
+              카드의 문양에 따라\n \n - <b>스페이드</b>는 스쿼트,
+              \n -<b>클로바</b>는 윗몸 일으키기, \n -
+              <b>하트</b>는 버피, \n -<b>다이아몬드</b>
+              는 푸쉬업을 수행해요. \n \n개수는
+              <b>카드에 적힌 숫자</b>
+              만큼 수행하고, \n총 13x4 = 52번의 세트를 수행하는 운동
+              방식이예요.
+            </>
+          }
+        >
+          <Paragraph.Text>
+            트럼프 카드를 이용한 재미있는 맨몸운동이예요.
+            <br />
+            뽑은 트럼프 카드의 문양에 따라
+            <br />
+            <br />-<b>스페이드</b>
+            는 스쿼트,
+            <br />-<b>클로바</b>
+            는 윗몸 일으키기,
+            <br />-<b>하트</b>
+            는 버피,
+            <br />-<b>다이아몬드</b>
+            는 푸쉬업을 수행해요.
+            <br />
+            <br />
+            개수는
+            <b>카드에 적힌 숫자</b>
+            만큼 수행하고,
+            <br />총 13x4 = 52번의 세트를 수행해요.
+          </Paragraph.Text>
+        </Post.Paragraph>
 
         <div style={styles.ruleBox}>
           <Paragraph typography="st6" color={adaptive.grey600}>
@@ -112,26 +110,6 @@ const styles: Record<string, React.CSSProperties> = {
     height: "132px",
     borderRadius: "20px",
     marginBottom: "20px",
-  },
-  exerciseTable: {
-    width: "100%",
-    display: "grid",
-    gridTemplateColumns: "1fr 1fr",
-    backgroundColor: adaptive.grey50,
-    borderRadius: "16px",
-    overflow: "hidden",
-    marginBottom: "24px",
-  },
-  exerciseCell: {
-    padding: "20px",
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    gap: "6px",
-  },
-  symbol: {
-    fontSize: "32px",
-    lineHeight: 1,
   },
   ruleBox: {
     textAlign: "center",

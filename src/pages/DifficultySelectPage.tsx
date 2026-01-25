@@ -5,7 +5,6 @@ import type { Difficulty } from "../types";
 
 interface DifficultySelectPageProps {
   onSelect: (difficulty: Difficulty) => void;
-  onBack: () => void;
 }
 
 type DifficultyUIConfig =

@@ -3,7 +3,6 @@ import { adaptive } from "@toss/tds-colors";
 
 interface CompletePageProps {
   onViewStats: () => void;
-  onGoHome: () => void;
 }
 
 export function CompletePage({ onViewStats }: CompletePageProps) {
