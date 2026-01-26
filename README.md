@@ -33,6 +33,15 @@ yarn dev
 # 빌드
 yarn build
 
+# 테스트 실행
+yarn test
+
+# 테스트 단일 실행
+yarn test:run
+
+# 테스트 커버리지
+yarn test:coverage
+
 # 배포 (토스 앱인토스)
 yarn deploy
 ```

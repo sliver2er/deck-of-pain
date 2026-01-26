@@ -214,7 +214,6 @@ describe('useWorkoutSession', () => {
         result.current.startSession('beginner')
       })
 
-      const card = result.current.currentCard!
       const exercise = result.current.currentExercise!
       const count = result.current.exerciseCount
 
