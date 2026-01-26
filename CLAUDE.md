@@ -17,47 +17,14 @@ UI, 컴포넌트 표현 시 되도록 apps-in-toss 의 Toss Design System을 사
 
 공식 문서: https://tossmini-docs.toss.im/tds-mobile/
 
-### 설치
-```bash
-yarn add @toss/tds-mobile @toss/tds-mobile-ait @emotion/react@^11
-```
-
-### 초기 설정
-**로컬 개발 환경**에서는 `TDSMobileProvider` 사용 (typography 스타일 적용됨):
-```tsx
-import { TDSMobileProvider } from '@toss/tds-mobile';
-
-createRoot(document.getElementById("root")!).render(
-  <TDSMobileProvider userAgent={navigator.userAgent}>
-    <App />
-  </TDSMobileProvider>
-);
-```
-
-**앱인토스 배포 환경**에서는 `TDSMobileAITProvider` 사용:
-```tsx
-import { TDSMobileAITProvider } from '@toss/tds-mobile-ait';
-
-// 앱인토스 환경에서만 동작 (deploymentId 필요)
-<TDSMobileAITProvider>
-  <App />
-</TDSMobileAITProvider>
-```
-
-⚠️ `ThemeProvider`는 typography 스타일이 적용 안 됨! 반드시 `TDSMobileProvider` 사용.
-
-### 주요 컴포넌트
-- **Button**: `color`(primary/danger/light/dark), `variant`(fill/weak), `size`(small~xlarge)
-- **Modal**: `open`/`onOpenChange`로 제어, `Modal.Overlay` + `Modal.Content` 구조
-- **Toast**: `position`(top/bottom), `duration`, `leftAddon`(아이콘/Lottie)
-- **TextField**: `variant`(box/line/big/hero), `.Clearable`/`.Password`/`.Button` 서브타입
-
 ### 유틸리티 훅
+
 - **useDialog**: `openAlert()`, `openConfirm()`, `openAsyncConfirm()`
 - **useToast**: 토스트 메시지 표시
 
 ### 색상
+
 ```tsx
-import { colors } from '@toss/tds-colors';
+import { colors } from "@toss/tds-colors";
 // colors.blue500, colors.grey900, colors.red500 등
 ```
